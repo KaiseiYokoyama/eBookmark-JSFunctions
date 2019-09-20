@@ -1,26 +1,32 @@
 //与える値が投げやりなので変えてください
 //json_dataを適宜整形してください
 
-var ser_title;
-var ser_is_bookmark;
+class SearchQuery {
+    constructor(title, tags, is_bookmark) {
+        this.title = title;
+        this.tags = tags;
+        this.is_bookmark = is_bookmark;
+    }
+}
 
-var json_data;
-
-try{
-    fetch("http://"+"His IP Address"+ ":8080/search", {
+/**
+ *
+ * @param query {SearchQuery} 検索のクエリ 詳しくはStandardを参照
+ */
+function search(query) {
+    fetch("http://" + ip + ":8080/search", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            "title": ser_title,
-            "tags" : ["","",""],
-            "is_bookmark" : ser_is_bookmark,
+        body: JSON.stringify(query)
+    })
+        .then(response => response.json())
+        .then(json => {
+            const books = JSON.parse(json);
+            // todo 取得した検索結果を用いた操作
         })
-      }).then(response => response.json())
-      .then(text => {
-        json_data = text;
-      });
-  }catch(e){
-    console.log(e)
+        .catch((e) => {
+            console.log(e)
+        });
 }

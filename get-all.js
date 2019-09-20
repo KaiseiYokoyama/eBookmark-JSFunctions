@@ -1,18 +1,15 @@
 //ムズい
-var title
-var id
-var tags
-var is_bookmark
-var memo
 
-try{
-
-  fetch("http://"+"His IP Address"+ ":8080/get/all", {
-      method: "GET",
-    }).then(response => response.json())
-    .then(text => {
-      title = text.title
-    });
-}catch(e){
-  console.log(e)
+function getAll() {
+    fetch("http://" + ip + ":8080/get/all", {
+        method: "GET",
+    })
+        .then((response) => response.json())
+        .then((json) => {
+            let books = JSON.parse(json);
+            // todo 取得したBook一覧を用いた処理を実行
+        })
+        .catch((e) => {
+            console.error(e);
+        });
 }

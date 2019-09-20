@@ -1,26 +1,25 @@
 //get_jsonを適宜整形してください
 
-var get_id = "";
-var get_json = "";
-
-function getone() {
-  try{
-    fetch("http://"+"His IP Address"+ ":8080/get/one", {
+/**
+ *
+ * @param id {String} 取得対象のid
+ */
+function getOne(id) {
+    fetch("http://" + ip + ":8080/get/one", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "id": get_id,
-          })
-      }).then(response => response.json())
-      .then(text => {
-        get_json = text;
-        console.log(get_json)
-      });
-  }catch(e){
-    console.log(e)
-  }
+            "id": id,
+        })
+    })
+        .then(response => response.json())
+        .then(json => {
+            let book = JSON.parse(json);
+            // todo 取得した本を用いた処理
+        })
+        .catch((e) => {
+            console.error(e)
+        });
 }
-
-getone();
